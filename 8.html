@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lịch sinh hoạt hằng tuần</title>
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            background-color: #ffffff;
+        }
+
+        .schedule {
+            width: 80%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            border: 2px solid #4aa3a3;
+        }
+
+        .schedule th,
+        .schedule td {
+            border: 1px solid #4aa3a3;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Tiêu đề cột */
+        .schedule thead th {
+            background-color: #e6f5f5;
+            font-weight: bold;
+        }
+
+        /* Cột thời gian */
+        .time {
+            font-weight: bold;
+            background-color: #f9f9f9;
+            width: 15%;
+        }
+
+        /* Dòng màu xanh nhạt */
+        .green {
+            background-color: #eaf7f4;
+        }
+
+        /* Chú thích dưới bảng */
+        .caption {
+            text-align: center;
+            font-style: italic;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<table class="schedule">
+    <thead>
+        <tr>
+            <th></th>
+            <th>THỨ HAI</th>
+            <th>THỨ BA</th>
+            <th>THỨ TƯ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="green">
+            <td class="time">Sáng</td>
+            <td>Học chính khóa</td>
+            <td>Học chính khóa</td>
+            <td>Học chính khóa</td>
+        </tr>
+        <tr>
+            <td class="time">Trưa</td>
+            <td>Nghỉ trưa</td>
+            <td>Đọc sách</td>
+            <td>Nghỉ trưa</td>
+        </tr>
+        <tr class="green">
+            <td class="time">Chiều</td>
+            <td>Học chính khóa</td>
+            <td>Học chính khóa</td>
+            <td>CLB Tin học</td>
+        </tr>
+        <tr>
+            <td class="time">Tối</td>
+            <td>Tập võ Vovinam</td>
+            <td>Tự học tại nhà</td>
+            <td>Tập võ Vovinam</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="caption">
+    Hình 3. Bảng lịch sinh hoạt hằng tuần đã được định kiểu bằng mã lệnh CSS
+</div>
+
+</body>
+</html>
