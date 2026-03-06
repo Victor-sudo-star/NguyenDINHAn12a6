@@ -322,96 +322,167 @@
     }
 
     /* ===================== TRANG THÀNH VIÊN ===================== */
-    .tv-filter {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 26px;
-      flex-wrap: wrap;
-      align-items: center;
+    .tv-toolbar {
+      display: flex; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; align-items: center;
     }
-
-    .tv-filter input {
-      flex: 1;
-      min-width: 200px;
-      padding: 10px 18px;
-      border: 2px solid #dde3ec;
-      border-radius: 9px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      outline: none;
+    .tv-toolbar input {
+      flex: 1; min-width: 180px;
+      padding: 9px 16px;
+      border: 1.5px solid #dde3ec; border-radius: 8px;
+      font-family: inherit; font-size: 0.93rem; outline: none;
       transition: border-color 0.18s;
     }
-
-    .tv-filter input:focus { border-color: var(--xanh); }
-
-    .tv-filter select {
-      padding: 10px 16px;
-      border: 2px solid #dde3ec;
-      border-radius: 9px;
-      font-family: inherit;
-      font-size: 0.92rem;
-      outline: none;
-      background: white;
-      cursor: pointer;
+    .tv-toolbar input:focus { border-color: var(--xanh); }
+    .tv-toolbar select {
+      padding: 9px 14px;
+      border: 1.5px solid #dde3ec; border-radius: 8px;
+      font-family: inherit; font-size: 0.9rem; outline: none;
+      background: white; cursor: pointer;
     }
 
-    .tv-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-    }
-
-    .tv-card {
+    .tv-table-wrap {
       background: white;
-      border-radius: 14px;
-      padding: 28px 20px 22px;
-      text-align: center;
+      border-radius: 12px;
       box-shadow: var(--bong);
-      transition: transform 0.2s, box-shadow 0.2s;
-      position: relative;
       overflow: hidden;
     }
 
-    .tv-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 28px rgba(26,111,196,0.14);
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
     }
 
-    .tv-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 5px;
-      background: linear-gradient(90deg, #1a6fc4, #1042a0);
+    thead tr {
+      background: linear-gradient(135deg, #1a6fc4, #1042a0);
+      color: white;
     }
 
-    .tv-avatar {
-      width: 72px; height: 72px;
+    thead th {
+      padding: 13px 16px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #f0f3f8;
+      cursor: pointer;
+      transition: background 0.14s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--xanh-nhat); }
+
+    tbody td {
+      padding: 11px 16px;
+      vertical-align: middle;
+    }
+
+    .td-ten { font-weight: 600; color: var(--chu); }
+    .td-stt { color: var(--chu-nhat); font-size: 0.85rem; text-align: center; }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .badge-lt  { background: #fff4e0; color: #d48a00; }
+    .badge-lp  { background: #e6f8ee; color: #1b8a45; }
+    .badge-hs  { background: var(--xanh-nhat); color: var(--xanh); }
+
+    .xem-btn {
+      background: var(--xanh-nhat);
+      color: var(--xanh);
+      border: none;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .xem-btn:hover { background: #c5d9f5; }
+
+    /* ===== MODAL ===== */
+    .modal-bg {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(16,30,60,0.38);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-bg.open { display: flex; animation: fadeIn 0.2s ease; }
+
+    .modal {
+      background: white;
+      border-radius: 16px;
+      width: 400px;
+      max-width: 92vw;
+      box-shadow: 0 16px 50px rgba(16,66,160,0.18);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #1a6fc4, #1042a0);
+      color: white;
+      padding: 22px 26px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .modal-avatar {
+      width: 58px; height: 58px;
       border-radius: 50%;
-      margin: 0 auto 14px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 800;
       color: white;
+      flex-shrink: 0;
+      border: 3px solid rgba(255,255,255,0.35);
     }
 
-    .tv-card h4 { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
-    .tv-card .chuc-vu {
-      font-size: 0.82rem;
-      color: white;
-      font-weight: 600;
-      padding: 3px 12px;
-      border-radius: 20px;
-      display: inline-block;
-      margin-bottom: 12px;
+    .modal-header h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+    .modal-header p  { font-size: 0.85rem; opacity: 0.85; }
+
+    .modal-body { padding: 22px 26px; }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f3f8;
+      font-size: 0.9rem;
     }
-    .tv-card .msv {
-      font-size: 0.82rem;
-      color: var(--chu-nhat);
+    .info-row:last-child { border-bottom: none; }
+    .info-row .label { color: var(--chu-nhat); font-weight: 500; }
+    .info-row .val   { font-weight: 700; color: var(--chu); }
+
+    .modal-footer {
+      padding: 14px 26px 20px;
+      text-align: right;
     }
 
-    /* Lớp trưởng accent */
-    .tv-card.lt::before { background: linear-gradient(90deg, #f5a623, #e08c00); }
+    .btn-dong {
+      background: #f0f3f8;
+      color: var(--chu);
+      border: none;
+      padding: 9px 22px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-dong:hover { background: #dde3ec; }
 
     /* ===================== FOOTER ===================== */
     footer {
@@ -600,19 +671,58 @@
 
 <!-- ======================== TRANG THÀNH VIÊN ======================== -->
 <div id="thanhvien" class="page">
-  <div class="section-title" style="margin-bottom:20px;">👥 Thành Viên Lớp 12A1</div>
+  <div class="section-title" style="margin-bottom:18px;">👥 Danh Sách Thành Viên Lớp 12A1</div>
 
-  <div class="tv-filter">
-    <input type="text" id="timKiem" placeholder="🔍 Tìm kiếm thành viên..." oninput="locThanhVien()"/>
+  <div class="tv-toolbar">
+    <input type="text" id="timKiem" placeholder="🔍 Tìm theo họ tên, MSHS..." oninput="locThanhVien()"/>
     <select onchange="locThanhVien()" id="locCV">
-      <option value="">Tất cả</option>
+      <option value="">Tất cả chức vụ</option>
       <option value="Lớp trưởng">Lớp trưởng</option>
       <option value="Lớp phó">Lớp phó</option>
       <option value="Học sinh">Học sinh</option>
     </select>
   </div>
 
-  <div class="tv-grid" id="tvGrid"></div>
+  <div class="tv-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:48px;text-align:center;">STT</th>
+          <th>Họ và Tên</th>
+          <th>Ngày Sinh</th>
+          <th>Năm Sinh</th>
+          <th>MSHS</th>
+          <th>Chức Vụ</th>
+          <th style="width:80px;"></th>
+        </tr>
+      </thead>
+      <tbody id="tvBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MODAL CHI TIẾT -->
+<div class="modal-bg" id="modalBg" onclick="dongModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-avatar" id="mAvatar"></div>
+      <div>
+        <h3 id="mTen"></h3>
+        <p id="mCV"></p>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="info-row"><span class="label">MSHS</span><span class="val" id="mMSV"></span></div>
+      <div class="info-row"><span class="label">Ngày sinh</span><span class="val" id="mNgay"></span></div>
+      <div class="info-row"><span class="label">Năm sinh</span><span class="val" id="mNam"></span></div>
+      <div class="info-row"><span class="label">Giới tính</span><span class="val" id="mGioiTinh"></span></div>
+      <div class="info-row"><span class="label">Địa chỉ</span><span class="val" id="mDiaChi"></span></div>
+      <div class="info-row"><span class="label">Chức vụ</span><span class="val" id="mCVDetail"></span></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-dong" onclick="document.getElementById('modalBg').classList.remove('open')">✕ Đóng</button>
+    </div>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -631,18 +741,18 @@
 
   /* ===== DỮ LIỆU THÀNH VIÊN ===== */
   const thanhVien = [
-    { ten: 'Nguyễn Minh Khoa', msv: 'HS001', cv: 'Lớp trưởng', mau: '#1a6fc4' },
-    { ten: 'Trần Thị Lan',    msv: 'HS002', cv: 'Lớp phó',    mau: '#1b8a45' },
-    { ten: 'Lê Hoàng Nam',    msv: 'HS003', cv: 'Lớp phó',    mau: '#c0392b' },
-    { ten: 'Phạm Bảo Châu',   msv: 'HS004', cv: 'Học sinh',   mau: '#8e44ad' },
-    { ten: 'Võ Thanh Tùng',   msv: 'HS005', cv: 'Học sinh',   mau: '#e67e22' },
-    { ten: 'Đỗ Ngọc Linh',    msv: 'HS006', cv: 'Học sinh',   mau: '#16a085' },
-    { ten: 'Huỳnh Gia Hân',   msv: 'HS007', cv: 'Học sinh',   mau: '#2980b9' },
-    { ten: 'Bùi Minh Tuấn',   msv: 'HS008', cv: 'Học sinh',   mau: '#c0392b' },
-    { ten: 'Ngô Thị Kim Chi', msv: 'HS009', cv: 'Học sinh',   mau: '#d35400' },
-    { ten: 'Dương Quốc Đạt',  msv: 'HS010', cv: 'Học sinh',   mau: '#1abc9c' },
-    { ten: 'Lý Thị Tuyết',    msv: 'HS011', cv: 'Học sinh',   mau: '#7f8c8d' },
-    { ten: 'Trịnh Văn Hùng',  msv: 'HS012', cv: 'Học sinh',   mau: '#2c3e50' },
+    { ten: 'Nguyễn Minh Khoa', msv: 'HS001', cv: 'Lớp trưởng', ngay: '05/02/2007', nam: 2007, gt: 'Nam',  dc: 'Q.1, TP.HCM',   mau: '#1a6fc4' },
+    { ten: 'Trần Thị Lan',     msv: 'HS002', cv: 'Lớp phó',    ngay: '12/04/2007', nam: 2007, gt: 'Nữ',   dc: 'Q.3, TP.HCM',   mau: '#1b8a45' },
+    { ten: 'Lê Hoàng Nam',     msv: 'HS003', cv: 'Lớp phó',    ngay: '21/07/2007', nam: 2007, gt: 'Nam',  dc: 'Q.Bình Thạnh',  mau: '#c0392b' },
+    { ten: 'Phạm Bảo Châu',    msv: 'HS004', cv: 'Học sinh',   ngay: '08/03/2007', nam: 2007, gt: 'Nữ',   dc: 'Q.Tân Bình',    mau: '#8e44ad' },
+    { ten: 'Võ Thanh Tùng',    msv: 'HS005', cv: 'Học sinh',   ngay: '30/09/2007', nam: 2007, gt: 'Nam',  dc: 'Q.Gò Vấp',      mau: '#e67e22' },
+    { ten: 'Đỗ Ngọc Linh',     msv: 'HS006', cv: 'Học sinh',   ngay: '14/11/2007', nam: 2007, gt: 'Nữ',   dc: 'Q.Phú Nhuận',   mau: '#16a085' },
+    { ten: 'Huỳnh Gia Hân',    msv: 'HS007', cv: 'Học sinh',   ngay: '03/06/2007', nam: 2007, gt: 'Nữ',   dc: 'Q.12, TP.HCM',  mau: '#2980b9' },
+    { ten: 'Bùi Minh Tuấn',    msv: 'HS008', cv: 'Học sinh',   ngay: '17/01/2007', nam: 2007, gt: 'Nam',  dc: 'Q.Tân Phú',     mau: '#c0392b' },
+    { ten: 'Ngô Thị Kim Chi',  msv: 'HS009', cv: 'Học sinh',   ngay: '25/08/2007', nam: 2007, gt: 'Nữ',   dc: 'Q.Bình Tân',    mau: '#d35400' },
+    { ten: 'Dương Quốc Đạt',   msv: 'HS010', cv: 'Học sinh',   ngay: '10/12/2007', nam: 2007, gt: 'Nam',  dc: 'Q.7, TP.HCM',   mau: '#1abc9c' },
+    { ten: 'Lý Thị Tuyết',     msv: 'HS011', cv: 'Học sinh',   ngay: '29/05/2007', nam: 2007, gt: 'Nữ',   dc: 'Q.Bình Chánh',  mau: '#7f8c8d' },
+    { ten: 'Trịnh Văn Hùng',   msv: 'HS012', cv: 'Học sinh',   ngay: '07/10/2007', nam: 2007, gt: 'Nam',  dc: 'Q.Thủ Đức',     mau: '#2c3e50' },
   ];
 
   function layVietTat(ten) {
@@ -651,19 +761,30 @@
     return (p[p.length - 2][0] + p[p.length - 1][0]).toUpperCase();
   }
 
+  function badgeCV(cv) {
+    if (cv === 'Lớp trưởng') return `<span class="badge badge-lt">⭐ Lớp trưởng</span>`;
+    if (cv === 'Lớp phó')    return `<span class="badge badge-lp">Lớp phó</span>`;
+    return `<span class="badge badge-hs">Học sinh</span>`;
+  }
+
   function renderTV(ds) {
-    const grid = document.getElementById('tvGrid');
-    grid.innerHTML = '';
-    ds.forEach(tv => {
-      const lt = tv.cv === 'Lớp trưởng';
-      const mauCV = lt ? '#f5a623' : tv.cv === 'Lớp phó' ? '#1b8a45' : '#1a6fc4';
-      grid.innerHTML += `
-        <div class="tv-card ${lt ? 'lt' : ''}">
-          <div class="tv-avatar" style="background:${tv.mau};">${layVietTat(tv.ten)}</div>
-          <h4>${tv.ten}</h4>
-          <div class="chuc-vu" style="background:${mauCV};">${lt ? '⭐ ' : ''}${tv.cv}</div>
-          <div class="msv">MSHS: ${tv.msv}</div>
-        </div>`;
+    const body = document.getElementById('tvBody');
+    body.innerHTML = '';
+    if (ds.length === 0) {
+      body.innerHTML = `<tr><td colspan="7" style="text-align:center;padding:28px;color:var(--chu-nhat);">Không tìm thấy thành viên nào.</td></tr>`;
+      return;
+    }
+    ds.forEach((tv, i) => {
+      body.innerHTML += `
+        <tr onclick="xemChiTiet(${thanhVien.indexOf(tv)})">
+          <td class="td-stt">${i + 1}</td>
+          <td class="td-ten">${tv.ten}</td>
+          <td>${tv.ngay}</td>
+          <td>${tv.nam}</td>
+          <td style="font-family:monospace;font-size:0.88rem;">${tv.msv}</td>
+          <td>${badgeCV(tv.cv)}</td>
+          <td><button class="xem-btn" onclick="event.stopPropagation();xemChiTiet(${thanhVien.indexOf(tv)})">Chi tiết</button></td>
+        </tr>`;
     });
   }
 
@@ -671,9 +792,29 @@
     const q  = document.getElementById('timKiem').value.toLowerCase();
     const cv = document.getElementById('locCV').value;
     renderTV(thanhVien.filter(tv =>
-      tv.ten.toLowerCase().includes(q) &&
+      (tv.ten.toLowerCase().includes(q) || tv.msv.toLowerCase().includes(q)) &&
       (cv === '' || tv.cv === cv)
     ));
+  }
+
+  function xemChiTiet(idx) {
+    const tv = thanhVien[idx];
+    document.getElementById('mAvatar').textContent    = layVietTat(tv.ten);
+    document.getElementById('mAvatar').style.background = tv.mau;
+    document.getElementById('mTen').textContent       = tv.ten;
+    document.getElementById('mCV').textContent        = tv.cv;
+    document.getElementById('mMSV').textContent       = tv.msv;
+    document.getElementById('mNgay').textContent      = tv.ngay;
+    document.getElementById('mNam').textContent       = tv.nam;
+    document.getElementById('mGioiTinh').textContent  = tv.gt;
+    document.getElementById('mDiaChi').textContent    = tv.dc;
+    document.getElementById('mCVDetail').textContent  = tv.cv;
+    document.getElementById('modalBg').classList.add('open');
+  }
+
+  function dongModal(e) {
+    if (e.target === document.getElementById('modalBg'))
+      document.getElementById('modalBg').classList.remove('open');
   }
 
   renderTV(thanhVien);
