@@ -1,184 +1,682 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Kỉ yếu lớp 12A</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Trang Lớp Học</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --xanh: #1a6fc4;
+      --xanh-nhat: #e8f1fb;
+      --vang: #f5a623;
+      --trang: #ffffff;
+      --xam: #f4f6f9;
+      --chu: #1e2535;
+      --chu-nhat: #5a6272;
+      --bo: 12px;
+      --bong: 0 4px 18px rgba(26,111,196,0.10);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: var(--xam);
+      color: var(--chu);
+      min-height: 100vh;
+    }
+
+    /* ===================== HEADER ===================== */
+    header {
+      background: linear-gradient(135deg, #1a6fc4 0%, #1042a0 100%);
+      color: white;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      box-shadow: 0 2px 12px rgba(16,66,160,0.18);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.18rem;
+      letter-spacing: 0.01em;
+    }
+
+    .logo-icon {
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    nav { display: flex; gap: 6px; }
+
+    nav button {
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.78);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+
+    nav button:hover,
+    nav button.active {
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+    }
+
+    nav button.active {
+      background: rgba(255,255,255,0.22);
+      color: #fff;
+    }
+
+    /* ===================== PAGES ===================== */
+    .page { display: none; padding: 36px 40px 60px; animation: fadeIn 0.35s ease; }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===================== TRANG CHỦ ===================== */
+    .hero {
+      background: linear-gradient(135deg, #1a6fc4 0%, #1042a0 100%);
+      border-radius: 18px;
+      padding: 52px 44px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 36px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      right: -60px; top: -60px;
+      width: 280px; height: 280px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: 60px; bottom: -80px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+
+    .hero-text { flex: 1; position: relative; z-index: 1; }
+
+    .hero-text h1 {
+      font-size: 2.1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .hero-text p {
+      font-size: 1.05rem;
+      opacity: 0.88;
+      line-height: 1.6;
+      margin-bottom: 26px;
+      max-width: 480px;
+    }
+
+    .hero-video {
+      flex: 0 0 320px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-video video {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 11px 26px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
+
+    .btn-vang {
+      background: var(--vang);
+      color: #fff;
+    }
+
+    .btn-outline {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.4);
+      margin-left: 10px;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: var(--bo);
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: var(--bong);
+      border-top: 4px solid var(--xanh);
+    }
+
+    .stat-card .so {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--xanh);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-card .nhan {
+      color: var(--chu-nhat);
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    /* Thong bao */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--chu);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--xanh-nhat);
+      border-radius: 2px;
+    }
+
+    .tb-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .tb-item {
+      background: white;
+      border-radius: var(--bo);
+      padding: 18px 22px;
+      box-shadow: var(--bong);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      border-left: 4px solid var(--xanh);
+      transition: transform 0.15s;
+    }
+
+    .tb-item:hover { transform: translateX(4px); }
+
+    .tb-icon {
+      width: 40px; height: 40px;
+      background: var(--xanh-nhat);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .tb-noi h4 { font-weight: 700; margin-bottom: 4px; font-size: 0.97rem; }
+    .tb-noi p  { font-size: 0.87rem; color: var(--chu-nhat); }
+    .tb-noi .ngay {
+      font-size: 0.8rem;
+      color: var(--xanh);
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    /* ===================== TRANG HOẠT ĐỘNG ===================== */
+    .hd-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 22px;
+      margin-top: 4px;
+    }
+
+    .hd-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--bong);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .hd-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(26,111,196,0.15);
+    }
+
+    .hd-img {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+
+    .hd-body { padding: 20px; }
+    .hd-body h3 { font-weight: 700; margin-bottom: 8px; font-size: 1rem; }
+    .hd-body p  { font-size: 0.88rem; color: var(--chu-nhat); line-height: 1.55; margin-bottom: 14px; }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .tag-xanh { background: var(--xanh-nhat); color: var(--xanh); }
+    .tag-vang { background: #fff4e0; color: #d48a00; }
+    .tag-xanh-la { background: #e6f8ee; color: #1b8a45; }
+    .tag-do { background: #fdecea; color: #c0392b; }
+
+    .hd-footer {
+      border-top: 1px solid #f0f0f0;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.83rem;
+      color: var(--chu-nhat);
+    }
+
+    /* ===================== TRANG THÀNH VIÊN ===================== */
+    .tv-filter {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tv-filter input {
+      flex: 1;
+      min-width: 200px;
+      padding: 10px 18px;
+      border: 2px solid #dde3ec;
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.18s;
+    }
+
+    .tv-filter input:focus { border-color: var(--xanh); }
+
+    .tv-filter select {
+      padding: 10px 16px;
+      border: 2px solid #dde3ec;
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 0.92rem;
+      outline: none;
+      background: white;
+      cursor: pointer;
+    }
+
+    .tv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .tv-card {
+      background: white;
+      border-radius: 14px;
+      padding: 28px 20px 22px;
+      text-align: center;
+      box-shadow: var(--bong);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tv-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(26,111,196,0.14);
+    }
+
+    .tv-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #1a6fc4, #1042a0);
+    }
+
+    .tv-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      margin: 0 auto 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .tv-card h4 { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+    .tv-card .chuc-vu {
+      font-size: 0.82rem;
+      color: white;
+      font-weight: 600;
+      padding: 3px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .tv-card .msv {
+      font-size: 0.82rem;
+      color: var(--chu-nhat);
+    }
+
+    /* Lớp trưởng accent */
+    .tv-card.lt::before { background: linear-gradient(90deg, #f5a623, #e08c00); }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background: #1e2535;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 22px;
+      font-size: 0.88rem;
+      margin-top: 20px;
+    }
+
+    footer span { color: rgba(255,255,255,0.85); font-weight: 600; }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 700px) {
+      .hero { flex-direction: column; padding: 32px 24px; }
+      .hero-video { flex: none; width: 100%; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .page { padding: 24px 16px 50px; }
+      header { padding: 0 16px; }
+      nav button { padding: 7px 12px; font-size: 0.88rem; }
+      .logo span { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Kỉ yếu lớp 12A</h1>
-    
-    <table border="1">
-        <tr>
-            <td><a href="#trangchu">Trang chủ</a></td>
-        </tr>
-        <tr>
-            <td><a href="#hoatdong">Hoạt động</a></td>
-        </tr>
-        <tr>
-            <td><a href="#thanhvienlop">Thành viên lớp</a></td>
-        </tr>
-    </table>
-    
-    <h2 id="thanhvienlop">Thành viên lớp</h2>
-    
-    <table border="1">
-        <tr>
-            <th>STT</th>
-            <th>Họ tên</th>
-            <th>Ngày sinh</th>
-            <th>Chức vụ</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Nguyễn Minh Châu</td>
-            <td>19/11/2008</td>
-            <td>Lớp trưởng</td>
-            <td><a href="chitiet1.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Nguyễn Hoàng Minh Hậu</td>
-            <td>12/05/2008</td>
-            <td>Lớp phó</td>
-            <td><a href="chitiet2.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Nguyễn Minh Huy</td>
-            <td>07/05/2008</td>
-            <td></td>
-            <td><a href="chitiet3.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Trần Gia Huy</td>
-            <td>26/08/2008</td>
-            <td></td>
-            <td><a href="chitiet4.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Bùi Vũ Anh Khoa</td>
-            <td>01/02/2008</td>
-            <td></td>
-            <td><a href="chitiet5.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Nguyễn Thị Tuyết Mai</td>
-            <td>10/12/2008</td>
-            <td></td>
-            <td><a href="chitiet6.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>Nguyễn Tuấn Nhân</td>
-            <td>11/03/2008</td>
-            <td></td>
-            <td><a href="chitiet7.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Hồ Thị Thúy Nhung</td>
-            <td>06/05/2008</td>
-            <td></td>
-            <td><a href="chitiet8.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>Lâm Huỳnh Nga</td>
-            <td>11/05/2008</td>
-            <td></td>
-            <td><a href="chitiet9.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>Lê Dương Thảo Nguyên</td>
-            <td>17/06/2008</td>
-            <td>Bí thư lớp</td>
-            <td><a href="chitiet10.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>12</td>
-            <td>Bùi Đoàn Mỹ Phước</td>
-            <td>11/02/2008</td>
-            <td></td>
-            <td><a href="chitiet12.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>13</td>
-            <td>Phạm Hoài Phương</td>
-            <td>17/06/2008</td>
-            <td></td>
-            <td><a href="chitiet13.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>14</td>
-            <td>Lê Thị Mỹ Phương</td>
-            <td>12/05/2008</td>
-            <td></td>
-            <td><a href="chitiet14.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>Lê Thị Quyên</td>
-            <td>17/11/2008</td>
-            <td></td>
-            <td><a href="chitiet15.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>16</td>
-            <td>Trương Hữu Quyền</td>
-            <td>05/06/2008</td>
-            <td></td>
-            <td><a href="chitiet16.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>17</td>
-            <td>Nguyễn Trần Trúc Quỳnh</td>
-            <td>11/06/2008</td>
-            <td></td>
-            <td><a href="chitiet17.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>18</td>
-            <td>Hoàng Thanh Sang</td>
-            <td>17/06/2008</td>
-            <td></td>
-            <td><a href="chitiet18.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>19</td>
-            <td>Trần Thanh Tâm</td>
-            <td>15/04/2008</td>
-            <td>Lớp phó</td>
-            <td><a href="chitiet19.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>20</td>
-            <td>Trần Văn Trung</td>
-            <td>20/07/2008</td>
-            <td>Tổ trưởng tổ 1</td>
-            <td><a href="chitiet20.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>21</td>
-            <td>Nguyễn Trí</td>
-            <td>04/10/2008</td>
-            <td></td>
-            <td><a href="chitiet21.html">Xem chi tiết</a></td>
-        </tr>
-        <tr>
-            <td>22</td>
-            <td>Nguyễn Ngọc Tường Vy</td>
-            <td>11/02/2008</td>
-            <td></td>
-            <td><a href="chitiet22.html">Xem chi tiết</a></td>
-        </tr>
-    </table>
-    
-    <p><i>Hình 1. Giao diện trang web thanhvienlop.html của lớp 12A</i></p>
-    
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">🎓</div>
+    <span>Lớp 12A1 — Trường THPT Nguyễn Du</span>
+  </div>
+  <nav>
+    <button class="active" onclick="chuyenTrang('trangchu', this)">🏠 Trang Chủ</button>
+    <button onclick="chuyenTrang('hoatdong', this)">📅 Hoạt Động</button>
+    <button onclick="chuyenTrang('thanhvien', this)">👥 Thành Viên</button>
+  </nav>
+</header>
+
+<!-- ======================== TRANG CHỦ ======================== -->
+<div id="trangchu" class="page active">
+
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Chào mừng đến<br>Lớp 12A1! 🎉</h1>
+      <p>Nơi kết nối, chia sẻ và lưu giữ những kỷ niệm đẹp nhất của tập thể lớp trong suốt hành trình học tập.</p>
+      <button class="btn btn-vang" onclick="chuyenTrang('hoatdong', document.querySelectorAll('nav button')[1])">Xem Hoạt Động</button>
+      <button class="btn btn-outline" onclick="chuyenTrang('thanhvien', document.querySelectorAll('nav button')[2])">Danh Sách Lớp</button>
+    </div>
+    <div class="hero-video">
+      <video src="1772763659373_36702-412858334_small.mp4" controls muted loop playsinline></video>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="so">42</div>
+      <div class="nhan">👤 Thành viên</div>
+    </div>
+    <div class="stat-card">
+      <div class="so">18</div>
+      <div class="nhan">📅 Hoạt động đã tổ chức</div>
+    </div>
+    <div class="stat-card">
+      <div class="so">3.8</div>
+      <div class="nhan">⭐ GPA trung bình lớp</div>
+    </div>
+  </div>
+
+  <div class="section-title">📢 Thông báo mới nhất</div>
+  <div class="tb-list">
+    <div class="tb-item">
+      <div class="tb-icon">📝</div>
+      <div class="tb-noi">
+        <h4>Lịch thi học kỳ II năm học 2024–2025</h4>
+        <p>BGH nhà trường thông báo lịch thi chính thức HK2, bắt đầu từ ngày 10/05/2025. Các bạn chú ý ôn tập và chuẩn bị đầy đủ giấy tờ.</p>
+        <div class="ngay">📅 03/03/2025</div>
+      </div>
+    </div>
+    <div class="tb-item" style="border-left-color: var(--vang);">
+      <div class="tb-icon" style="background:#fff4e0;">🎯</div>
+      <div class="tb-noi">
+        <h4>Họp lớp chuẩn bị hội thao trường</h4>
+        <p>GVCN tổ chức họp lớp vào chiều thứ Tư 05/03 tại phòng 305 để phân công nhiệm vụ chuẩn bị hội thao.</p>
+        <div class="ngay" style="color:var(--vang);">📅 01/03/2025</div>
+      </div>
+    </div>
+    <div class="tb-item" style="border-left-color:#1b8a45;">
+      <div class="tb-icon" style="background:#e6f8ee;">🌿</div>
+      <div class="tb-noi">
+        <h4>Tham gia trồng cây xanh trong khuôn viên trường</h4>
+        <p>Hoạt động tình nguyện sáng thứ Bảy 08/03. Mọi người mang dụng cụ và trang phục thể thao nhé!</p>
+        <div class="ngay" style="color:#1b8a45;">📅 28/02/2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== TRANG HOẠT ĐỘNG ======================== -->
+<div id="hoatdong" class="page">
+  <div class="section-title" style="margin-bottom:24px;">📅 Các Hoạt Động Của Lớp</div>
+
+  <div class="hd-grid">
+
+    <div class="hd-card">
+      <div class="hd-img" style="background:linear-gradient(135deg,#e8f1fb,#c5d9f5);">🏃</div>
+      <div class="hd-body">
+        <h3>Hội thao trường 2025</h3>
+        <p>Toàn lớp tham gia thi đấu bóng đá, cầu lông, kéo co và các môn thể thao phong trào trong ngày hội thao thường niên.</p>
+        <span class="tag tag-xanh">Thể thao</span>
+      </div>
+      <div class="hd-footer">
+        <span>📅 15/03/2025</span>
+        <span>42 người tham gia</span>
+      </div>
+    </div>
+
+    <div class="hd-card">
+      <div class="hd-img" style="background:linear-gradient(135deg,#fff4e0,#ffe0a0);">🌸</div>
+      <div class="hd-body">
+        <h3>Cắm trại xuân Ất Tỵ</h3>
+        <p>Chuyến dã ngoại cắm trại 2 ngày 1 đêm tại khu sinh thái Bình Phước — ăn tối trại, vui chơi, lửa trại ấm cúng.</p>
+        <span class="tag tag-vang">Dã ngoại</span>
+      </div>
+      <div class="hd-footer">
+        <span>📅 25/01/2025</span>
+        <span>38 người tham gia</span>
+      </div>
+    </div>
+
+    <div class="hd-card">
+      <div class="hd-img" style="background:linear-gradient(135deg,#e6f8ee,#b2ecd0);">📚</div>
+      <div class="hd-body">
+        <h3>Học nhóm ôn thi HK2</h3>
+        <p>Nhóm học tập 12A1 tổ chức ôn tập tập trung theo môn mỗi tuần, có bạn xuất sắc hướng dẫn và giải đề thử.</p>
+        <span class="tag tag-xanh-la">Học tập</span>
+      </div>
+      <div class="hd-footer">
+        <span>📅 Hàng tuần</span>
+        <span>30+ người tham gia</span>
+      </div>
+    </div>
+
+    <div class="hd-card">
+      <div class="hd-img" style="background:linear-gradient(135deg,#fdecea,#f5b8b2);">❤️</div>
+      <div class="hd-body">
+        <h3>Tình nguyện – Áo ấm mùa đông</h3>
+        <p>Quyên góp và phân phát áo ấm, sách vở cho trẻ em vùng cao tỉnh Lào Cai trong chương trình tình nguyện hè.</p>
+        <span class="tag tag-do">Tình nguyện</span>
+      </div>
+      <div class="hd-footer">
+        <span>📅 20/12/2024</span>
+        <span>25 người tham gia</span>
+      </div>
+    </div>
+
+    <div class="hd-card">
+      <div class="hd-img" style="background:linear-gradient(135deg,#f0e6ff,#d4b8f5);">🎤</div>
+      <div class="hd-body">
+        <h3>Văn nghệ chào mừng 20/11</h3>
+        <p>Lớp 12A1 biểu diễn tiết mục múa dân gian và ca khúc truyền thống tri ân thầy cô trong ngày Nhà giáo Việt Nam.</p>
+        <span class="tag" style="background:#f0e6ff;color:#7b3fd4;">Văn nghệ</span>
+      </div>
+      <div class="hd-footer">
+        <span>📅 20/11/2024</span>
+        <span>42 người tham gia</span>
+      </div>
+    </div>
+
+    <div class="hd-card">
+      <div class="hd-img" style="background:linear-gradient(135deg,#e0f7fa,#80deea);">🍀</div>
+      <div class="hd-body">
+        <h3>Trồng cây xanh khuôn viên trường</h3>
+        <p>Hoạt động bảo vệ môi trường, toàn lớp cùng nhau trồng cây, chăm sóc vườn hoa phía trước dãy phòng học.</p>
+        <span class="tag" style="background:#e0f7fa;color:#00838f;">Môi trường</span>
+      </div>
+      <div class="hd-footer">
+        <span>📅 08/03/2025</span>
+        <span>40 người tham gia</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======================== TRANG THÀNH VIÊN ======================== -->
+<div id="thanhvien" class="page">
+  <div class="section-title" style="margin-bottom:20px;">👥 Thành Viên Lớp 12A1</div>
+
+  <div class="tv-filter">
+    <input type="text" id="timKiem" placeholder="🔍 Tìm kiếm thành viên..." oninput="locThanhVien()"/>
+    <select onchange="locThanhVien()" id="locCV">
+      <option value="">Tất cả</option>
+      <option value="Lớp trưởng">Lớp trưởng</option>
+      <option value="Lớp phó">Lớp phó</option>
+      <option value="Học sinh">Học sinh</option>
+    </select>
+  </div>
+
+  <div class="tv-grid" id="tvGrid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  Lớp <span>12A1</span> — Trường THPT <span>Nguyễn Du</span> &nbsp;|&nbsp; Năm học 2024–2025 &nbsp;|&nbsp; Made with ❤️
+</footer>
+
+<script>
+  /* ===== CHUYỂN TRANG ===== */
+  function chuyenTrang(id, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (btn) btn.classList.add('active');
+  }
+
+  /* ===== DỮ LIỆU THÀNH VIÊN ===== */
+  const thanhVien = [
+    { ten: 'Nguyễn Minh Khoa', msv: 'HS001', cv: 'Lớp trưởng', mau: '#1a6fc4' },
+    { ten: 'Trần Thị Lan',    msv: 'HS002', cv: 'Lớp phó',    mau: '#1b8a45' },
+    { ten: 'Lê Hoàng Nam',    msv: 'HS003', cv: 'Lớp phó',    mau: '#c0392b' },
+    { ten: 'Phạm Bảo Châu',   msv: 'HS004', cv: 'Học sinh',   mau: '#8e44ad' },
+    { ten: 'Võ Thanh Tùng',   msv: 'HS005', cv: 'Học sinh',   mau: '#e67e22' },
+    { ten: 'Đỗ Ngọc Linh',    msv: 'HS006', cv: 'Học sinh',   mau: '#16a085' },
+    { ten: 'Huỳnh Gia Hân',   msv: 'HS007', cv: 'Học sinh',   mau: '#2980b9' },
+    { ten: 'Bùi Minh Tuấn',   msv: 'HS008', cv: 'Học sinh',   mau: '#c0392b' },
+    { ten: 'Ngô Thị Kim Chi', msv: 'HS009', cv: 'Học sinh',   mau: '#d35400' },
+    { ten: 'Dương Quốc Đạt',  msv: 'HS010', cv: 'Học sinh',   mau: '#1abc9c' },
+    { ten: 'Lý Thị Tuyết',    msv: 'HS011', cv: 'Học sinh',   mau: '#7f8c8d' },
+    { ten: 'Trịnh Văn Hùng',  msv: 'HS012', cv: 'Học sinh',   mau: '#2c3e50' },
+  ];
+
+  function layVietTat(ten) {
+    const p = ten.trim().split(' ');
+    if (p.length === 1) return p[0][0].toUpperCase();
+    return (p[p.length - 2][0] + p[p.length - 1][0]).toUpperCase();
+  }
+
+  function renderTV(ds) {
+    const grid = document.getElementById('tvGrid');
+    grid.innerHTML = '';
+    ds.forEach(tv => {
+      const lt = tv.cv === 'Lớp trưởng';
+      const mauCV = lt ? '#f5a623' : tv.cv === 'Lớp phó' ? '#1b8a45' : '#1a6fc4';
+      grid.innerHTML += `
+        <div class="tv-card ${lt ? 'lt' : ''}">
+          <div class="tv-avatar" style="background:${tv.mau};">${layVietTat(tv.ten)}</div>
+          <h4>${tv.ten}</h4>
+          <div class="chuc-vu" style="background:${mauCV};">${lt ? '⭐ ' : ''}${tv.cv}</div>
+          <div class="msv">MSHS: ${tv.msv}</div>
+        </div>`;
+    });
+  }
+
+  function locThanhVien() {
+    const q  = document.getElementById('timKiem').value.toLowerCase();
+    const cv = document.getElementById('locCV').value;
+    renderTV(thanhVien.filter(tv =>
+      tv.ten.toLowerCase().includes(q) &&
+      (cv === '' || tv.cv === cv)
+    ));
+  }
+
+  renderTV(thanhVien);
+</script>
 </body>
 </html>
