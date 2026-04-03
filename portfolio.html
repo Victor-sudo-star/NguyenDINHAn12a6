@@ -1,91 +1,315 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-    <meta charset="utf-8">
-    <title>Hồ sơ cá nhân</title>
-    <style>
-        h1 {
-            font-family: Arial;
-            font-size: 32pt;
-            font-weight: bold;
-            color: blue;
-            text-shadow: 2px 2px 5px grey;
-            letter-spacing: 4px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Nguyễn Văn A</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#020617,#0f172a);
+    color:#e2e8f0;
+    padding:20px;
+}
+
+/* CONTAINER */
+.cv{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:300px 1fr;
+    border-radius:15px;
+    overflow:hidden;
+    backdrop-filter: blur(10px);
+    background:rgba(15,23,42,0.8);
+    box-shadow:0 0 60px rgba(0,0,0,0.8);
+}
+
+/* LEFT */
+.left{
+    background:rgba(2,6,23,0.9);
+    padding:25px;
+    border-right:1px solid #1e293b;
+}
+
+.avatar{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.avatar img{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    border:3px solid #38bdf8;
+    transition:0.4s;
+}
+.avatar img:hover{
+    transform:scale(1.1) rotate(2deg);
+}
+
+h2{
+    color:#38bdf8;
+    margin:15px 0 10px;
+    border-bottom:1px solid #1e293b;
+    padding-bottom:5px;
+}
+
+/* INFO */
+.info p{
+    font-size:14px;
+    margin:5px 0;
+}
+
+/* SKILL */
+.skill{
+    margin:10px 0;
+}
+.bar{
+    height:6px;
+    background:#1e293b;
+    border-radius:10px;
+    overflow:hidden;
+}
+.bar div{
+    height:100%;
+    background:linear-gradient(90deg,#38bdf8,#6366f1);
+    animation:grow 2s;
+}
+
+/* RIGHT */
+.right{
+    padding:30px;
+}
+
+.name{
+    font-size:32px;
+    font-weight:600;
+    color:#38bdf8;
+}
+
+.subtitle{
+    color:#94a3b8;
+    margin-bottom:20px;
+}
+
+/* SECTION */
+.section{
+    margin-bottom:25px;
+    opacity:0;
+    transform:translateY(40px);
+    transition:0.6s;
+}
+.section.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.section h3{
+    color:#38bdf8;
+    margin-bottom:10px;
+    border-left:4px solid #38bdf8;
+    padding-left:10px;
+}
+
+/* CARD */
+.card{
+    background:rgba(30,41,59,0.5);
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
+    transition:0.3s;
+}
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 20px #38bdf8;
+}
+
+/* LIST */
+ul{
+    padding-left:20px;
+}
+li{
+    margin-bottom:6px;
+}
+
+/* GALLERY */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+.gallery img{
+    width:100%;
+    border-radius:8px;
+    transition:0.3s;
+}
+.gallery img:hover{
+    transform:scale(1.05);
+}
+
+/* MEDIA */
+video,audio{
+    width:100%;
+    margin-top:10px;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+table th,table td{
+    border:1px solid #1e293b;
+    padding:8px;
+    text-align:center;
+}
+table th{
+    background:#1e293b;
+}
+
+/* LINK */
+a{
+    color:#38bdf8;
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:underline;
+}
+
+/* ANIMATION */
+@keyframes grow{
+    from{width:0}
+}
+
+@media(max-width:768px){
+    .cv{
+        grid-template-columns:1fr;
+    }
+}
+</style>
 </head>
+
 <body>
-    <table border="0" width="100%">
-        <tr>
-            <td>
-                <h1>Giới thiệu chung</h1>
-                <p>Họ tên: Nguyễn Văn A</p>
-                <p>Nơi sinh: Thành phố Hồ Chí Minh</p>
-                <p>Điện thoại: 090-xxxx-xxx</p>
-                <p>Email: nguyenvana@gmail.com</p>
-            </td>
-            <td align="right">
-                <img src="avatar.png" width="150" alt="Ảnh đại diện">
-            </td>
-        </tr>
-    </table>
 
-    <hr>
-    <h2>Sở thích</h2>
-    <ul>
-        <li>Môn học: Tin học, Toán, Ngoại ngữ</li>
-        <li>Thể thao: Bóng đá, Võ thuật</li>
-        <li>Đọc sách, xem phim</li>
-    </ul>
+<div class="cv">
 
-    <h2>Các hoạt động đã tham gia</h2>
-    <ul>
-        <li>Giải kéo co cấp trường. Thành tích: Vô địch</li>
-        <li>Cuộc thi Vui học lập trình cấp trường. Thành tích: Giải khuyến khích</li>
-        <li>Hội diễn văn nghệ 20-11 cấp trường. Vai trò: Hát bè trong tốp ca</li>
-    </ul>
+<!-- LEFT -->
+<div class="left">
 
-    <hr>
-    <h2>Nội dung yêu thích</h2>
-    <h3>Hình ảnh</h3>
-    <table border="0">
-        <tr>
-            <td><img src="bien1.jpg" width="250"></td>
-            <td><img src="bien2.jpg" width="250"></td>
-            <td><img src="bien3.jpg" width="250"></td>
-        </tr>
-        <tr>
-            <td><img src="duong.jpg" width="250"></td>
-            <td><img src="thanhpho.jpg" width="250"></td>
-            <td><img src="canhvat.jpg" width="250"></td>
-        </tr>
-    </table>
+<div class="avatar">
+<img src="avatar.png">
+</div>
 
-    <h3>Video và bài hát yêu thích</h3>
-    <p>Video: Chào mừng bạn đến Việt Nam</p>
-    <video width="400" controls>
-        <source src="vietnam.mp4" type="video/mp4">
-    </video>
+<h2>Thông tin cá nhân</h2>
+<div class="info">
+<p>Nguyễn Văn A</p>
+<p>TP. Hồ Chí Minh</p>
+<p>090-xxxx-xxx</p>
+<p>nguyenvana@gmail.com</p>
+</div>
 
-    <p>Bài hát: Việt Nam ơi!</p>
-    <audio controls>
-        <source src="baihat.mp3" type="audio/mpeg">
-    </audio>
+<h2>Kỹ năng</h2>
 
-    <hr>
-    <h3>Lịch sinh hoạt hằng tuần</h3>
-    <table border="1" cellspacing="0" cellpadding="5">
-        <tr><th>Thứ</th><th>Hoạt động</th></tr>
-        <tr><td>Thứ Bảy</td><td>Học nhóm Tiếng Anh</td></tr>
-        <tr><td>Chủ nhật</td><td>Đá bóng tại sân trường</td></tr>
-    </table>
+<div class="skill">Tin học
+<div class="bar"><div style="width:85%"></div></div></div>
 
-    <fieldset>
-        <legend>Những trang web thường ghé thăm</legend>
-        <ul>
-            <li><a href="https://moet.gov.vn">Bộ Giáo dục và Đào tạo</a></li>
-            <li><a href="https://code.org">Học lập trình Code.org</a></li>
-        </ul>
-    </fieldset>
+<div class="skill">Toán
+<div class="bar"><div style="width:80%"></div></div></div>
+
+<div class="skill">Ngoại ngữ
+<div class="bar"><div style="width:75%"></div></div></div>
+
+<h2>Sở thích</h2>
+<p>Bóng đá, Võ thuật</p>
+<p>Đọc sách, xem phim</p>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+
+<div class="name">Nguyễn Văn A</div>
+<div class="subtitle">Hồ sơ cá nhân</div>
+
+<div class="section">
+<h3>Giới thiệu</h3>
+<p>Học sinh yêu thích Tin học, Toán và Ngoại ngữ, năng động trong hoạt động thể thao và nghệ thuật.</p>
+</div>
+
+<div class="section">
+<h3>Hoạt động</h3>
+<div class="card">Giải kéo co cấp trường - Vô địch</div>
+<div class="card">Cuộc thi lập trình - Giải khuyến khích</div>
+<div class="card">Văn nghệ 20-11 - Hát bè</div>
+</div>
+
+<div class="section">
+<h3>Hình ảnh yêu thích</h3>
+<div class="gallery">
+<img src="bien1.jpg">
+<img src="bien2.jpg">
+<img src="bien3.jpg">
+<img src="duong.jpg">
+<img src="thanhpho.jpg">
+<img src="canhvat.jpg">
+</div>
+</div>
+
+<div class="section">
+<h3>Video yêu thích</h3>
+<p>Chào mừng bạn đến Việt Nam</p>
+<video controls>
+<source src="vietnam.mp4">
+</video>
+</div>
+
+<div class="section">
+<h3>Bài hát yêu thích</h3>
+<p>Việt Nam ơi!</p>
+<audio controls>
+<source src="baihat.mp3">
+</audio>
+</div>
+
+<div class="section">
+<h3>Lịch sinh hoạt</h3>
+<table>
+<tr><th>Thứ</th><th>Hoạt động</th></tr>
+<tr><td>Thứ Bảy</td><td>Học nhóm Tiếng Anh</td></tr>
+<tr><td>Chủ nhật</td><td>Đá bóng tại sân trường</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h3>Website thường ghé thăm</h3>
+<p><a href="https://moet.gov.vn">Bộ Giáo dục và Đào tạo</a></p>
+<p><a href="https://code.org">Code.org</a></p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+const sections=document.querySelectorAll('.section');
+window.addEventListener('scroll',()=>{
+sections.forEach(sec=>{
+if(sec.getBoundingClientRect().top < window.innerHeight-100){
+sec.classList.add('show');
+}
+});
+});
+</script>
+
 </body>
 </html>
